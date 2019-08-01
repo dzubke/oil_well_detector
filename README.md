@@ -5,8 +5,8 @@ For this project, I will be training an image recognition algorithm to recognize
 a pixel is part of an oil well. I will be analyzing various types of satellite images to conduct this analysis.
 
 Right now it is still a work in progress. So far I have:
-  -downloaded the relevant satelittle images (the raw images are too big to be in a github repo)
-  -utilized Rasterio and Shapely analyze the features of the image and crop an area of interest
+  - downloaded the relevant satelittle images (the raw images are too big to be in a github repo)
+  - utilized Rasterio and Shapely analyze the features of the image and crop an area of interest
   
   Still to come I need to:
    - convert polygon outlines of the oil well and convert them into a raster image with positive value (1) inside the
