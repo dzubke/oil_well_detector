@@ -1,10 +1,9 @@
 import geopandas as gpd
 import rasterio as rio
-from rasterio import features as riofeatures
-import numpy as np
+from rasterio import features
+from typing import List
 
-
-def polyread(in_fn, dest_crs):
+def polygon_read(in_fn: str, dest_crs: int) -> gpd.GeoDataFrame:
     '''This function read a filename 'in_fn' of a geopackage layer that contains polygons
         surrounding the oil wells.
 
@@ -24,7 +23,7 @@ def polyread(in_fn, dest_crs):
 
     return proj_poly
 
-def poly2raster(polygon, rst_fn, out_fn, out_shape):
+def polygon_2_raster(polygon: gpd.GeoDataFrame, rst_fn: str, out_fn: str, out_shape:List[int]) -> None:
     '''This function take in a geopandas object of polygons and converts them into a raster
         image based on the 'temp_rast' raster
 
@@ -47,25 +46,5 @@ def poly2raster(polygon, rst_fn, out_fn, out_shape):
             #we create a generator of geom, value pairs to use in the features.rasterize function
             shapes = ((feature['geometry'], 1) for feature in polygon.iterfeatures())
             
-            labels = riofeatures.rasterize(shapes=shapes, out_shape=out_shape, transform=meta['transform'], fill=0, dtype='uint16', all_touched=False)    
+            labels = features.rasterize(shapes=shapes, out_shape=out_shape, transform=meta['transform'], fill=0, dtype='uint16', all_touched=False)    
             out.write(labels, indexes=1)
-
-
-def reshape(rst_fn):
-    '''Takes in a raster image and reshapes it into a column vector
-
-    Input:
-    rst_fn -- a rasterio object whose values will be reshaped into a column vector
-    
-    Output:
-    rst_vec -- a column vector of the the numpy array associated with the 'img' rasterio object
-    metadata -- the metadata associated with the 'img' rasterio object
-
-    '''
-    with rio.open(rst_fn, 'r') as rst:
-        metadata = rst.meta.copy()
-        array = rst.read(1)
-        rst_vec = array.reshape(-1,1)
-        
-
-    return rst_vec, metadata
