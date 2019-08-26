@@ -89,5 +89,3 @@ if __name__ == '__main__':
 
     # as I somewhat expected, the nn is always predicting a zero value because there are so few positive 
     # values. I need to think about how to proceed....
-
-    # adding some values to test git

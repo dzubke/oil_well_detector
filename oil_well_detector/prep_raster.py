@@ -2,7 +2,6 @@ import rasterio as rio
 import geopandas as gpd
 import shapely.geometry as shpgeo
 from rasterio.mask import mask
-from rasterio.plot import show
 
 def img_read(filename: str):
     '''Reads in a file with the filename 'filename' and returns a rasterio object

@@ -25,8 +25,8 @@ def create_placeholders(n_x: int, n_y: int) ->Tuple[tf.placeholder, tf.placehold
 
     """
     
-    X = tf.placeholder(dtype=tf.float32, shape = [n_x, None], name='X')
-    Y = tf.placeholder(dtype=tf.float32, shape = [n_y, None], name='Y')
+    X = tf.compat.v1.placeholder(dtype=tf.float32, shape = [n_x, None], name='X')
+    Y = tf.compat.v1.placeholder(dtype=tf.float32, shape = [n_y, None], name='Y')
     
     return X, Y
 
