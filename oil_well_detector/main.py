@@ -1,12 +1,11 @@
+import prep_raster, prep_polygon, prep_data, explore_raster, explore_data, nn_layers, nn_forward_prop, nn_compute_cost, nn_model
+import tensorflow as tf
+import sys
+import matplotlib.pyplot as plt
 
-
-
-if __name__ == '__main__':
-    import prep_raster, prep_polygon, prep_data, explore_raster, explore_data, nn_layers, nn_forward_prop, nn_compute_cost, nn_model
-    import tensorflow as tf
-    import sys
-    import matplotlib.pyplot as plt
-
+def main():
+    """Contains all of the fucntion calls and puts the analysis together
+    """
 
     im1 = '/Users/dustin/CS/data/sat_images/bakken/S2B_MSIL1C_20190606T174919_N0207_R141_T13UFP_20190606T194941.SAFE/GRANULE/L1C_T13UFP_A011750_20190606T174937/IMG_DATA/T13UFP_20190606T174919_B03.jp2'
 
@@ -42,15 +41,15 @@ if __name__ == '__main__':
     print(f"X_data shape: {X_data.shape}")
     print(f"Y_data shape: {Y_data.shape}")
 
- #   x_data_norm = prep_data.normalize(x_data) #this has an error
+    # x_data_norm = prep_data.normalize(x_data) #this has an error
 
     X_train, X_dev, X_test, Y_train, Y_dev, Y_test = prep_data.data_split( X_data, Y_data, (0.8, 0.1, 0.1) )
-   
+
 
     explore_data.describe(Y_dev)
     #explore_data.histogram(Y_dev.T)
 
- #   sys.exit()
+    # sys.exit()
     print("\nNow starting with the neural network layers")
 
     
@@ -89,3 +88,7 @@ if __name__ == '__main__':
 
     # as I somewhat expected, the nn is always predicting a zero value because there are so few positive 
     # values. I need to think about how to proceed....
+
+
+if __name__ == '__main__':
+    main()
